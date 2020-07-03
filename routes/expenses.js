@@ -38,23 +38,6 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// router.get('/date/:date', async (req, res) => {
-//   try{
-//     const exp = await Expense.find({date: req.params.date})
-//       .select({amount: 1, date: 1, category: 1, info: 1});
-    
-//     if(!exp) {
-//       res.status(404)
-//         .send('Not found');
-//     }
-
-//     res.send(exp);
-//   } catch(ex) {
-//     res.status(500)
-//       .send(ex.message);
-//   }
-// });
-
 router.post('/', async ({ body }, res) => {
   const { error } = validation(body);
   

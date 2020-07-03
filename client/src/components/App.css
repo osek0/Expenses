@@ -1,0 +1,10 @@
+body {
+  background-color: rgb(33, 33, 33);
+  color: rgb(216, 202, 185);
+}
+
+.app {
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: repeat(5, 1fr);
+}
