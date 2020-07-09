@@ -6,15 +6,35 @@ class expChart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      labels: ['Red', 'Blue', 'Yellow', 'Green'],
-      data: [23, 15, 52, 35]
+      labels: [],
+      data: []
     };
   }
 
-  processData = ({ data }) => {
-    const labels = data.map( doc => doc.date );
-    console.log(labels);
+  //TO DO data array
 
+  // processData = ({data}) => {
+  //   const amounts = [];
+  //   data.map( doc => amounts.push(doc.amount.$numberDecimal));
+
+  //   this.setState({data: amounts});
+
+  //   console.log(data);
+  // }
+
+  getDateArray = () => {
+    const currDate = new Date();
+    let pastDate = new Date();
+    let dateArray = [];
+
+    pastDate.setDate(pastDate.getDate() - 31);
+
+    while(pastDate <= currDate) {
+      dateArray.push(pastDate.toLocaleString('default', {day: '2-digit', month: 'short'}));
+      pastDate.setDate(pastDate.getDate() + 1);
+    }
+
+    this.setState({labels: dateArray});
   }
 
   drawChart = () => {
@@ -81,13 +101,24 @@ class expChart extends React.Component {
       .then(response => this.processData(response))
       .catch(err => console.log(err));
 
+    this.getDateArray();
+  }
+
+  componentDidUpdate() {
     this.drawChart();
+
+    // const htmlCanvas = document.getElementById('myChart');
+    // const ctx = htmlCanvas.getContext('2d');
+
+
+    // ctx.canvas.width  = window.innerWidth;
+    // ctx.canvas.height = window.innerHeight;
   }
 
   render() {
     return (
       <div>
-        <canvas id="myChart" width="400" height="400"></canvas>
+        <canvas id="myChart" width="800" height="800"></canvas>
       </div>
     );
   }
